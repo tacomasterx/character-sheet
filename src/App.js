@@ -1,6 +1,7 @@
 import './App.css';
 import CharacterIdentity from './components/CharacterIdentity.jsx'
 import CharacterScores from './components/CharacterScores.jsx'
+import CharacterDescription from './components/CharacterDescription.jsx'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <div className='container-main'>
         <CharacterIdentity />
         <CharacterScores />
+        <CharacterDescription />
       </div>
     </div>
   );
