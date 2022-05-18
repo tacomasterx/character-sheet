@@ -1,10 +1,10 @@
 import {Formik, Form} from 'formik';
 import '../style/CharacterIdentity.css'
 import IdentityField from './IdentityField.jsx'
-// import IdentityFieldAc from './IdentityFieldAc.jsx'
 import SelectField from './SelectField.jsx'
+import IdentityFieldAc from './IdentityFieldAc.jsx';
 
-// import {races} from '../data/races.js'
+import {races} from '../data/races.js'
 
 const validate = (values) => {
   const errors = {};
@@ -42,7 +42,7 @@ const validate = (values) => {
 
 function CharacterIdentity() {
 
-  const races = ['elf', 'human', 'dwarf', 'halfling'];
+  // const races = ['elf', 'human', 'dwarf', 'halfling'];
   const backgrounds = ['artisan', 'entertainer', 'outlander', 'soldier'];
   const classes = ['bard', 'cleric', 'fighter', 'wizard'];
   const alignments = ['lawful good', 'lawful neutral', 'lawful evil',
@@ -64,30 +64,28 @@ function CharacterIdentity() {
       validate={validate}
       onSubmit={values => console.log(values)}
     >
-      <Form className='identity-form'>
-        <IdentityField name='playerName' label='Player Name' />
-        <IdentityField name='characterName' label='Character Name' />
-        <IdentityField name='race' label='Race' id='race' />
-        <SelectField label='Character race' name='race'>
-          <option value=''>Select a race</option>
-          {races.map((arace) => <option value={arace} key={arace}>{arace}</option>)}
-        </SelectField>
-        <SelectField label='Character background' name='background'>
-          <option value=''>Select a background</option>
-          {backgrounds.map((bg) => <option value={bg} key={bg}>{bg}</option>)}
-        </SelectField>
-        <SelectField label='Character class' name='class'>
-          <option value=''>Select a class</option>
-          {classes.map((cclass) => <option value={cclass} key={cclass}>{cclass}</option>)}
-        </SelectField>
-        <IdentityField name='level' label='Level' />
-        <SelectField label='Character alignment' name='alignment'>
-          <option value=''>Select an alignment</option>
-          {alignments.map((alignm) => <option value={alignm} key={alignm}>{alignm}</option>)}
-        </SelectField>
-        <IdentityField name='experience' label='Experience points' />
-        <button type='submit'>Send</button>
-      </Form>
+      {({handleChange, values, setFieldValue}) => (
+        <Form className='identity-form'>
+          <IdentityField name='playerName' label='Player Name' />
+          <IdentityField name='characterName' label='Character Name' />
+          <IdentityFieldAc name='race' label='Race' id='race' suggestions={races} setFieldValue={setFieldValue} />
+          <SelectField label='Character background' name='background'>
+            <option value=''>Select a background</option>
+            {backgrounds.map((bg) => <option value={bg} key={bg}>{bg}</option>)}
+          </SelectField>
+          <SelectField label='Character class' name='class'>
+            <option value=''>Select a class</option>
+            {classes.map((cclass) => <option value={cclass} key={cclass}>{cclass}</option>)}
+          </SelectField>
+          <IdentityField name='level' label='Level' />
+          <SelectField label='Character alignment' name='alignment'>
+            <option value=''>Select an alignment</option>
+            {alignments.map((alignm) => <option value={alignm} key={alignm}>{alignm}</option>)}
+          </SelectField>
+          <IdentityField name='experience' label='Experience points' />
+          <button type='submit'>Send</button>
+        </Form>
+      )}
     </Formik>
   );
 }
