@@ -4,8 +4,6 @@ import IdentityField from './IdentityField.jsx'
 import SelectField from './SelectField.jsx'
 import IdentityFieldAc from './IdentityFieldAc.jsx';
 
-import {races} from '../data/races.js'
-
 const validate = (values) => {
   const errors = {};
 
@@ -42,9 +40,6 @@ const validate = (values) => {
 
 function CharacterIdentity() {
 
-  // const races = ['elf', 'human', 'dwarf', 'halfling'];
-  const backgrounds = ['artisan', 'entertainer', 'outlander', 'soldier'];
-  const classes = ['bard', 'cleric', 'fighter', 'wizard'];
   const alignments = ['lawful good', 'lawful neutral', 'lawful evil',
     'neutral good', 'neutral', 'neutral evil',
     'chaotic good', 'chaotic neutral', 'chaotic evil'
@@ -64,21 +59,15 @@ function CharacterIdentity() {
       validate={validate}
       onSubmit={values => console.log(values)}
     >
-      {({handleChange, values, setFieldValue}) => (
+      {({setFieldValue}) => (
         <Form className='identity-form'>
           <IdentityField name='playerName' label='Player Name' />
           <IdentityField name='characterName' label='Character Name' />
-          <IdentityFieldAc name='race' label='Race' id='race' suggestions={races} setFieldValue={setFieldValue} />
-          <SelectField label='Character background' name='background'>
-            <option value=''>Select a background</option>
-            {backgrounds.map((bg) => <option value={bg} key={bg}>{bg}</option>)}
-          </SelectField>
-          <SelectField label='Character class' name='class'>
-            <option value=''>Select a class</option>
-            {classes.map((cclass) => <option value={cclass} key={cclass}>{cclass}</option>)}
-          </SelectField>
+          <IdentityFieldAc name='race' label='Race' id='race' setFieldValue={setFieldValue} />
+          <IdentityFieldAc label='Character background' name='background' setFieldValue={setFieldValue} />
+          <IdentityFieldAc label='Character class' name='class' setFieldValue={setFieldValue} />
           <IdentityField name='level' label='Level' />
-          <SelectField label='Character alignment' name='alignment'>
+          <SelectField label='Character alignment' name='alignment' >
             <option value=''>Select an alignment</option>
             {alignments.map((alignm) => <option value={alignm} key={alignm}>{alignm}</option>)}
           </SelectField>

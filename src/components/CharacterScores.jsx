@@ -1,36 +1,32 @@
-import { Formik, Form } from 'formik'
+import {Formik, Form} from 'formik'
 import '../style/CharacterScores.css'
 import AbilityScore from './AbilityScore.jsx'
 import CheckBox from './CheckBox.jsx'
 
-const getModifier = (score) => {
-  return (String( score%2 === 0 ? (score - 10)/2 : (score - 11)/2 ))
-};
-
 const validate = (values) => {
   const errors = {};
 
-  if ( values.strength <= -1 || !values.strength || isNaN(values.strength) ){
+  if (values.strength <= -1 || !values.strength || isNaN(values.strength)) {
     errors.strength = 'Please enter a non negative number.';
   }
 
-  if ( values.dexterity <= -1 || !values.dexterity || isNaN(values.dexterity) ){
+  if (values.dexterity <= -1 || !values.dexterity || isNaN(values.dexterity)) {
     errors.dexterity = 'Please enter a non negative number.';
   }
 
-  if ( values.constitution <= -1 || !values.constitution || isNaN(values.constitution) ){
+  if (values.constitution <= -1 || !values.constitution || isNaN(values.constitution)) {
     errors.constitution = 'Please enter a non negative number.';
   }
 
-  if ( values.intelligence <= -1 || !values.intelligence || isNaN(values.intelligence) ){
+  if (values.intelligence <= -1 || !values.intelligence || isNaN(values.intelligence)) {
     errors.intelligence = 'Please enter a non negative number.';
   }
 
-  if ( values.wisdom <= -1 || !values.wisdom || isNaN(values.wisdom) ){
+  if (values.wisdom <= -1 || !values.wisdom || isNaN(values.wisdom)) {
     errors.wisdom = 'Please enter a non negative number.';
   }
 
-  if ( values.charisma <= -1 || !values.charisma || isNaN(values.charisma) ){
+  if (values.charisma <= -1 || !values.charisma || isNaN(values.charisma)) {
     errors.charisma = 'Please enter a non negative number.';
   }
 
@@ -48,7 +44,7 @@ function CharacterScores() {
       wisdom: 10,
       charisma: 10,
       inspiration: false,
-    }} 
+    }}
       validate={validate}
       onSubmit={values => console.log(values)}
     >
