@@ -16,7 +16,11 @@ const IdentityFieldAc = ({label, id, ...props}) => {
 
   return (
     <div className='formik-fields'>
-      <label htmlFor={field.name} className='identity-label'>{label}</label>
+      {
+        label !== null ?
+          <label htmlFor={field.name} className='identity-label'>{label}</label> :
+          null
+      }
       <Autosuggest
         inputProps={{
           placeholder: `Type a sddfskj...`,
@@ -48,13 +52,13 @@ const IdentityFieldAc = ({label, id, ...props}) => {
             let result = [];
             switch (field.name) {
               case 'race':
-                result = getRaces(value);
+                result = getRaces(value.toLowerCase());
                 break;
               case 'background':
-                result = getBackgrounds(value);
+                result = getBackgrounds(value.toLowerCase());
                 break;
               case 'class':
-                result = getClasses(value);
+                result = getClasses(value.toLowerCase());
                 break;
               default:
                 break;

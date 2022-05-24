@@ -1,7 +1,8 @@
 import './App.css';
-import CharacterIdentity from './components/CharacterIdentity.jsx'
-import CharacterScores from './components/CharacterScores.jsx'
-import CharacterDescription from './components/CharacterDescription.jsx'
+import CharacterIdentityForm from './components/CharacterIdentityForm.jsx'
+import CharacterScoresForm from './components/CharacterScoresForm.jsx'
+import CharacterDescriptionForm from './components/CharacterDescriptionForm.jsx'
+import CharacterEquipmentForm from './components/CharacterEquipmentForm.jsx'
 
 function App() {
   return (
@@ -9,9 +10,10 @@ function App() {
       <div className='container-logo'>
       </div>
       <div className='container-main'>
-        <CharacterIdentity />
-        <CharacterScores />
-        <CharacterDescription />
+        <CharacterIdentityForm />
+        <CharacterScoresForm />
+        <CharacterDescriptionForm />
+        <CharacterEquipmentForm />
       </div>
     </div>
   );
