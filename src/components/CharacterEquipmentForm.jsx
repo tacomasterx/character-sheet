@@ -6,17 +6,17 @@ import EquipmentField from './EquipmentField.jsx';
 const validate = (values) => {
   const errors = {};
 
-  if (!values.class) {
-    errors.class = 'Required.';
-  }
+  // if (!values.class) {
+  //   errors.class = 'Required.';
+  // }
 
-  if (!values.background) {
-    errors.background = 'Required.';
-  }
+  // if (!values.background) {
+  //   errors.background = 'Required.';
+  // }
 
-  if (!values.race) {
-    errors.race = 'Required.';
-  }
+  // if (!values.race) {
+  //   errors.race = 'Required.';
+  // }
 
   return errors;
 }
@@ -25,7 +25,7 @@ function CharacterEquipmentForm() {
 
   return (
     <Formik initialValues={{
-      weapons: '',
+      weapons: [],
       armor: '',
       shield: '',
       tools: '',
