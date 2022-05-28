@@ -1,4 +1,4 @@
-const races = (string) => {
+const weapons = (string) => {
   const array = [
     {
       "index": "club",
@@ -336,24 +336,7 @@ const races = (string) => {
       "url": "/api/magic-items/weapon-3"
     }
   ];
-  return array.filter(element => element.name.substring(-1, string.length) === string);
+  return array.filter(element => element.name.substring(-1, string.length).toLowerCase() === string);
 }
 
-export default races;
-// export const races = [{
-//   traits: {str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1},
-//   name: "human",
-//   id: 4,
-// }, {
-//   traits: {dex: 2, int: 1, wis: 1},
-//   name: "elf",
-//   id: 2
-// }, {
-//   traits: {con: 2, wis: 2},
-//   name: "dwarf",
-//   id: 1
-// }, {
-//   traits: {dex: 2, int: 1, cha: 1},
-//   name: "halfling",
-//   id: 3
-// }];
+export default weapons;

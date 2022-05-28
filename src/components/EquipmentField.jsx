@@ -1,20 +1,31 @@
 import '../style/EquipmentField.css'
 import EquipmentForm from './EquipmentForm.jsx';
-// import Weapon from './sheet/Weapon.jsx'
 
-function EquipmentField({title, value, setFieldValue, ...props}) {
+function EquipmentField({name, setFieldValue, ...props}) {
 
   const addEquipment = (equipment) => {
-    console.log(equipment);
+    let buffer = [];
+    if (props.value !== []) {
+      buffer = props.value;
+      // props.setFieldValue(props.name, buffer);
+      // props.setFieldValue(props.name, equipment);
+      console.log(buffer);
+      console.log(props.value);
+    } else {
+      buffer.push(equipment);
+      // props.setFieldValue(props.name, buffer);
+      // props.setFieldValue(props.name, equipment);
+      console.log(buffer);
+      console.log(props.value);
+    }
   };
 
   return (
     <div className='equipment-container'>
-      <span className="container-label">
-        {title}
-      </span>
       <EquipmentForm
         addEquipment={addEquipment}
+        name={name}
+        setFieldValue={setFieldValue}
         {...props}
       ></EquipmentForm>
       <div className="equipment-list-container">

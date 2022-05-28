@@ -4,12 +4,9 @@ import Autosuggest from 'react-autosuggest';
 // import axios from 'axios';
 // import TextField from '@mui/material/TextField';
 
-import getRaces from '../data/races.js'
 import getWeapons from '../data/weapons.js'
-import getClasses from '../data/classes.js'
-import getBackgrounds from '../data/backgrounds.js'
 
-const EquipmentFieldAc = ({label, id, ...props}) => {
+const EquipmentFieldAc = ({label, ...props}) => {
   const [suggestions, setSuggestions] = useState([]);
 
   return (
@@ -21,14 +18,14 @@ const EquipmentFieldAc = ({label, id, ...props}) => {
       }
       <Autosuggest
         inputProps={{
-          placeholder: `Type a sddfskj...`,
+          placeholder: `Type a ${props.name}`,
           autoComplete: 'off',
           name: props.name,
-          id: id,
-          value: props.value,
-          className: 'identity-input',
+          id: props.id,
+          value: props.newItem,
+          className: 'equipment-input',
           onChange: (_event, {newValue}) => {
-            props.setValue(newValue);
+            props.setNewItem(newValue);
           }
         }}
         suggestions={suggestions}
@@ -49,17 +46,8 @@ const EquipmentFieldAc = ({label, id, ...props}) => {
           setSuggestions(() => {
             let result = [];
             switch (props.name) {
-              case 'race':
-                result = getRaces(value.toLowerCase());
-                break;
               case 'weapons':
                 result = getWeapons(value.toLowerCase());
-                break;
-              case 'background':
-                result = getBackgrounds(value.toLowerCase());
-                break;
-              case 'class':
-                result = getClasses(value.toLowerCase());
                 break;
               default:
                 break;
@@ -75,7 +63,7 @@ const EquipmentFieldAc = ({label, id, ...props}) => {
           if (method === 'enter') {
             event.preventDefault();
           }
-          props.setValue(suggestion.name);
+          props.setNewItem(suggestion.name);
         }}
         getSuggestionValue={suggestion => suggestion.name}
         renderSuggestion={(suggestion) => <div>{suggestion.name}</div>
