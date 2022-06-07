@@ -28,18 +28,7 @@ const weaponDetails = (string) => {
       "normal": 0
     },
     "weight": 0,
-    "properties": [
-      {
-        "index": "",
-        "name": "",
-        "url": ""
-      },
-      {
-        "index": "",
-        "name": "",
-        "url": ""
-      }
-    ],
+    "properties": "",
     "url": "",
     "contents": []
   }, {
@@ -71,18 +60,7 @@ const weaponDetails = (string) => {
       "normal": 5
     },
     "weight": 2,
-    "properties": [
-      {
-        "index": "light",
-        "name": "Light",
-        "url": "/api/weapon-properties/light"
-      },
-      {
-        "index": "monk",
-        "name": "Monk",
-        "url": "/api/weapon-properties/monk"
-      }
-    ],
+    "properties": "light, monk",
     "url": "/api/equipment/club",
     "contents": []
   },
@@ -115,13 +93,7 @@ const weaponDetails = (string) => {
       "normal": 5
     },
     "weight": 3,
-    "properties": [
-      {
-        "index": "versatile",
-        "name": "Versatile",
-        "url": "/api/weapon-properties/versatile"
-      }
-    ],
+    "properties": "versatile",
     "two_handed_damage": {
       "damage_dice": "1d10",
       "damage_type": {
@@ -163,18 +135,7 @@ const weaponDetails = (string) => {
       "long": 320
     },
     "weight": 2,
-    "properties": [
-      {
-        "index": "ammunition",
-        "name": "Ammunition",
-        "url": "/api/weapon-properties/ammunition"
-      },
-      {
-        "index": "two-handed",
-        "name": "Two-Handed",
-        "url": "/api/weapon-properties/two-handed"
-      }
-    ],
+    "properties": "ammunition, two handed",
     "url": "/api/equipment/shortbow",
     "contents": []
   }

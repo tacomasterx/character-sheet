@@ -46,18 +46,35 @@ function CharacterEquipmentForm() {
               <div className='weapon-list-container'>
                 {values.weapons.map((_weapon, index) => (
                   <div key={index} className='weapon-list-element'>
-                    {/** both these conventions do the same */}
+                    <label htmlFor={`weapons[${index}].name`}>Name</label>
                     <Field name={`weapons[${index}].name`} />
-                    <Field name={`weapons[${index}].damage.damage_dice`} />
+                    <label htmlFor={`weapons[${index}].weapon_category`}>Category</label>
                     <Field name={`weapons.${index}.weapon_category`} />
-                    <Field name={`weapons[${index}].weapon_range`} />
+                    <div className="range-section">
+                      <label htmlFor={`weapons[${index}].weapon_range`}>Range</label>
+                      <Field name={`weapons[${index}].weapon_range`} />
+                      <br />
+                      <Field name={`weapons[${index}].range.normal`} />
+                      /
+                      <Field name={`weapons[${index}].range.long`} />
+                    </div>
+                    <div className="damage-section">
+                      <label htmlFor={`weapons[${index}].weapon_range`}>Damage</label>
+                      <br />
+                      <label htmlFor={`weapons[${index}].damage.damage_dice`}>Dice</label>
+                      <Field name={`weapons[${index}].damage.damage_dice`} />
+                      <label htmlFor={`weapons[${index}].damage.damage_type.name`}>Type</label>
+                      <Field name={`weapons[${index}].damage.damage_type.name`} />
+                    </div>
+                    <label htmlFor={`weapons[${index}].properties`}>Properties</label>
+                    <Field name={`weapons[${index}].properties`} />
+                    <label htmlFor={`weapons[${index}].weight`}>Weight</label>
                     <Field name={`weapons.${index}.weight`} />
                     <button
                       type="button"
                       className='equipment-remove'
                       onClick={() => arrayHelpers.remove(index)}
                     >
-                      {/* <AiOutlineCloseCircle className='weapon-icon' /> */}
                       -
                     </button>
                   </div>
@@ -69,21 +86,30 @@ function CharacterEquipmentForm() {
                     const weaponSpecs = weaponDetails(
                       document.getElementById('weapons').value
                     );
-                    console.log(weaponSpecs);
                     if (weaponSpecs.length !== 0) {
                       arrayHelpers.push({
                         name: (weaponSpecs[0].name),
-                        damage: {damage_dice: weaponSpecs[0].damage.damage_dice},
                         weapon_category: weaponSpecs[0].weapon_category,
                         weapon_range: weaponSpecs[0].weapon_range,
+                        damage: {
+                          damage_dice: weaponSpecs[0].damage.damage_dice,
+                          damage_type: {name: weaponSpecs[0].damage.damage_type.name}
+                        },
+                        range: {
+                          normal: weaponSpecs[0].range.normal,
+                          long: weaponSpecs[0].range.long ? weaponSpecs[0].range.long : ''
+                        },
+                        properties: weaponSpecs[0].properties,
                         weight: weaponSpecs[0].weight
                       })
                     } else {
                       arrayHelpers.push({
                         name: '',
-                        damage: {damage_dice: ''},
+                        damage: {damage_dice: '', damage_type: {name: ''}},
                         weapon_category: '',
                         weapon_range: '',
+                        range: {normal: '', long: ''},
+                        properties: '',
                         weight: ''
                       })
                     }
