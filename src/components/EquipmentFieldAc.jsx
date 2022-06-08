@@ -5,6 +5,7 @@ import Autosuggest from 'react-autosuggest';
 // import TextField from '@mui/material/TextField';
 
 import getWeapons from '../data/weapons.js'
+import getTools from '../data/tools.js'
 
 const EquipmentFieldAc = ({label, ...props}) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -48,6 +49,10 @@ const EquipmentFieldAc = ({label, ...props}) => {
             switch (props.name) {
               case 'weapons':
                 result = getWeapons(value.toLowerCase());
+                break;
+              case 'tool':
+                result = getTools(value.toLowerCase());
+                console.log(value)
                 break;
               default:
                 break;

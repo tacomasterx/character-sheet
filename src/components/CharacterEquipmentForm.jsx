@@ -5,6 +5,7 @@ import EquipmentField from './EquipmentField.jsx';
 // import {AiOutlineCloseCircle} from 'react-icons/ai'
 
 import weaponDetails from '../data/weapon-details.js';
+import toolDetails from '../data/tools.js';
 
 const validate = (values) => {
   const errors = {};
@@ -31,7 +32,7 @@ function CharacterEquipmentForm() {
       weapons: [],//weaponDetails(),
       armor: '',
       shield: '',
-      tools: '',
+      tools: [],
     }}
       validate={validate}
       onSubmit={values => console.log(values)}
@@ -122,7 +123,48 @@ function CharacterEquipmentForm() {
           />
           <IdentityFieldAc name='armor' label='Armor' id='armor' setFieldValue={setFieldValue} />
           <IdentityFieldAc label='Shield' name='shield' id='shield' setFieldValue={setFieldValue} />
-          <IdentityFieldAc label='Tools' name='tools' id='tools' setFieldValue={setFieldValue} />
+          <label className="container-label">Tools</label>
+          <EquipmentField name={`tool`} id='tool' setFieldValue={setFieldValue} />
+          <FieldArray
+            name='tools'
+            render={arrayHelpers => (
+              <div className='tools-list-container'>
+                {values.tools.map((_tool, index) => (
+                  <div key={index} className='tools-list-element'>
+                    <label htmlFor={`tools[${index}].name`}>Name</label>
+                    <Field name={`tools[${index}].name`} />
+                    <button
+                      type="button"
+                      className='equipment-remove'
+                      onClick={() => arrayHelpers.remove(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className='equipment-add'
+                  onClick={() => {
+                    const toolList = toolDetails(
+                      document.getElementById('tool').value.toLowerCase()
+                    );
+                    if (toolList.length !== 0) {
+                      arrayHelpers.push({
+                        name: (toolList[0].name),
+                      })
+                    } else {
+                      arrayHelpers.push({
+                        name: '',
+                      })
+                    }
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            )}
+          />
           <button type='submit'>Send</button>
         </Form>
       )}
