@@ -23,7 +23,7 @@ const IdentityFieldAc = ({label, id, ...props}) => {
       }
       <Autosuggest
         inputProps={{
-          placeholder: `Type a sddfskj...`,
+          placeholder: `Type a ${field.name}`,
           autoComplete: 'off',
           name: field.name,
           id: id,

@@ -2,25 +2,18 @@ import {Formik, Form, FieldArray, Field} from 'formik';
 import '../style/CharacterEquipment.css'
 import IdentityFieldAc from './IdentityFieldAc.jsx';
 import EquipmentField from './EquipmentField.jsx';
+import SelectField from './SelectField.jsx';
+import DescriptionArea from './DescriptionArea.jsx';
+import CheckBox from './CheckBox.jsx';
 // import {AiOutlineCloseCircle} from 'react-icons/ai'
 
 import weaponDetails from '../data/weapon-details.js';
-import toolDetails from '../data/tools.js';
+import parameterList from '../data/parameters.js';
+import toolDetails from '../data/tool-details.js';
+import magicItemsDetails from '../data/mi-details.js';
 
 const validate = (values) => {
   const errors = {};
-
-  // if (!values.class) {
-  //   errors.class = 'Required.';
-  // }
-
-  // if (!values.background) {
-  //   errors.background = 'Required.';
-  // }
-
-  // if (!values.race) {
-  //   errors.race = 'Required.';
-  // }
 
   return errors;
 }
@@ -33,6 +26,8 @@ function CharacterEquipmentForm() {
       armor: '',
       shield: '',
       tools: [],
+      magicItems: [],
+      // treasure: [],
     }}
       validate={validate}
       onSubmit={values => console.log(values)}
@@ -105,7 +100,7 @@ function CharacterEquipmentForm() {
                       })
                     } else {
                       arrayHelpers.push({
-                        name: '',
+                        name: document.getElementById('weapons').value,
                         damage: {damage_dice: '', damage_type: {name: ''}},
                         weapon_category: '',
                         weapon_range: '',
@@ -121,7 +116,7 @@ function CharacterEquipmentForm() {
               </div>
             )}
           />
-          <IdentityFieldAc name='armor' label='Armor' id='armor' setFieldValue={setFieldValue} />
+          <EquipmentField name='armor' label='Armor' id='armor' setFieldValue={setFieldValue} />
           <IdentityFieldAc label='Shield' name='shield' id='shield' setFieldValue={setFieldValue} />
           <label className="container-label">Tools</label>
           <EquipmentField name={`tool`} id='tool' setFieldValue={setFieldValue} />
@@ -133,6 +128,9 @@ function CharacterEquipmentForm() {
                   <div key={index} className='tools-list-element'>
                     <label htmlFor={`tools[${index}].name`}>Name</label>
                     <Field name={`tools[${index}].name`} />
+                    <label htmlFor={`tools[${index}].weight`}>Weight</label>
+                    <Field name={`tools[${index}].weight`} />
+                    <CheckBox name={`tools[${index}].proficient`}>Proficient?</CheckBox>
                     <button
                       type="button"
                       className='equipment-remove'
@@ -152,10 +150,78 @@ function CharacterEquipmentForm() {
                     if (toolList.length !== 0) {
                       arrayHelpers.push({
                         name: (toolList[0].name),
+                        weight: (toolList[0].weight),
+                        proficient: false,
                       })
                     } else {
                       arrayHelpers.push({
-                        name: '',
+                        name: document.getElementById('tool').value,
+                        proficient: false,
+                        weight: 0,
+                      })
+                    }
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            )}
+          />
+          <label className="container-label">Magic Items</label>
+          <EquipmentField name={`magicItem`} id='magicItem' setFieldValue={setFieldValue} />
+          <FieldArray
+            name='magicItems'
+            render={arrayHelpers => (
+              <div className='magicItems-list-container'>
+                {values.magicItems.map((_, index) => (
+                  <div key={index} className='magicItems-list-element'>
+                    <label htmlFor={`magicItems[${index}].name`}>Name</label>
+                    <Field name={`magicItems[${index}].name`} />
+                    <SelectField name={`magicItems[${index}].type`} label='type'>
+                      <option value >Select a parameter</option>
+                      {parameterList().map((parameter) => {
+                        return (
+                          <option value={parameter} key={parameter}>{parameter}</option>
+                        )
+                      }
+                      )}
+                    </SelectField>
+                    <label htmlFor={`magicItems[${index}].bonus`}>Bonus</label>
+                    <Field name={`magicItems[${index}].bonus`} />
+                    <DescriptionArea label='Description' name={`magicItems[${index}].desc`}></DescriptionArea>
+                    <label htmlFor={`magicItems[${index}].weight`}>Weight</label>
+                    <Field name={`magicItems[${index}].weight`} />
+                    <button
+                      type="button"
+                      className='equipment-remove'
+                      onClick={() => arrayHelpers.remove(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className='equipment-add'
+                  onClick={() => {
+                    const toolList = magicItemsDetails(
+                      document.getElementById('magicItem').value.toLowerCase()
+                    );
+                    if (toolList.length !== 0) {
+                      arrayHelpers.push({
+                        name: (toolList[0].name),
+                        parameter: 0,
+                        bonus: 0,
+                        desc: (toolList[0].desc),
+                        weight: (toolList[0].weight ? toolList[0].weight : 0),
+                      })
+                    } else {
+                      arrayHelpers.push({
+                        name: document.getElementById('magicItem').value,
+                        parameter: 0,
+                        bonus: 0,
+                        desc: '',
+                        weight: 0,
                       })
                     }
                   }}
