@@ -83,6 +83,12 @@ function CharacterEquipmentForm() {
                       document.getElementById('weapons').value
                     );
                     if (weaponSpecs.length !== 0) {
+                      let propertiesList = "";
+                      weaponSpecs[0].properties.map((prop, index) => {
+                        propertiesList += prop.name;
+                        if (index !== weaponSpecs[0].properties.length - 1) {propertiesList += ", "}
+                        return null;
+                      })
                       arrayHelpers.push({
                         name: (weaponSpecs[0].name),
                         weapon_category: weaponSpecs[0].weapon_category,
@@ -95,7 +101,7 @@ function CharacterEquipmentForm() {
                           normal: weaponSpecs[0].range.normal,
                           long: weaponSpecs[0].range.long ? weaponSpecs[0].range.long : ''
                         },
-                        properties: weaponSpecs[0].properties,
+                        properties: propertiesList,
                         weight: weaponSpecs[0].weight
                       })
                     } else {

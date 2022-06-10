@@ -314,26 +314,6 @@ const weapons = (string) => {
       "index": "vorpal-sword",
       "name": "Vorpal Sword",
       "url": "/api/magic-items/vorpal-sword"
-    },
-    {
-      "index": "weapon",
-      "name": "Weapon, +1, +2, or +3",
-      "url": "/api/magic-items/weapon"
-    },
-    {
-      "index": "weapon-1",
-      "name": "Weapon, +1",
-      "url": "/api/magic-items/weapon-1"
-    },
-    {
-      "index": "weapon-2",
-      "name": "Weapon, +2",
-      "url": "/api/magic-items/weapon-2"
-    },
-    {
-      "index": "weapon-3",
-      "name": "Weapon, +3",
-      "url": "/api/magic-items/weapon-3"
     }
   ];
   return array.filter(element => element.name.substring(-1, string.length).toLowerCase() === string);
