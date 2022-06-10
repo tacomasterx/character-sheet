@@ -8,6 +8,7 @@ import Autosuggest from 'react-autosuggest';
 import getRaces from '../data/races.js'
 import getClasses from '../data/classes.js'
 import getBackgrounds from '../data/backgrounds.js'
+import getArmor from '../data/armor.js'
 
 const IdentityFieldAc = ({label, id, ...props}) => {
   const [field, meta] = useField(props);
@@ -56,6 +57,9 @@ const IdentityFieldAc = ({label, id, ...props}) => {
                 break;
               case 'background':
                 result = getBackgrounds(value.toLowerCase());
+                break;
+              case 'armor':
+                result = getArmor(value.toLowerCase());
                 break;
               case 'class':
                 result = getClasses(value.toLowerCase());

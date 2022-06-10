@@ -27,7 +27,7 @@ function CharacterEquipmentForm() {
       shield: '',
       tools: [],
       magicItems: [],
-      // treasure: [],
+      treasure: [],
     }}
       validate={validate}
       onSubmit={values => console.log(values)}
@@ -116,7 +116,7 @@ function CharacterEquipmentForm() {
               </div>
             )}
           />
-          <EquipmentField name='armor' label='Armor' id='armor' setFieldValue={setFieldValue} />
+          <IdentityFieldAc name='armor' label='Armor' id='armor' setFieldValue={setFieldValue} />
           <IdentityFieldAc label='Shield' name='shield' id='shield' setFieldValue={setFieldValue} />
           <label className="container-label">Tools</label>
           <EquipmentField name={`tool`} id='tool' setFieldValue={setFieldValue} />
@@ -224,6 +224,45 @@ function CharacterEquipmentForm() {
                         weight: 0,
                       })
                     }
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            )}
+          />
+          <label className="container-label">Treasure</label>
+          <EquipmentField name={`treasure`} id='treasure' setFieldValue={setFieldValue} />
+          <FieldArray
+            name='treasure'
+            render={arrayHelpers => (
+              <div className='treasure-list-container'>
+                {values.treasure.map((_, index) => (
+                  <div key={index} className='treasure-list-element'>
+                    <label htmlFor={`treasure[${index}].name`}>Name</label>
+                    <Field name={`treasure[${index}].name`} />
+                    <label htmlFor={`treasure[${index}].quantity`}>Quantity</label>
+                    <Field name={`treasure[${index}].quantity`} />
+                    <label htmlFor={`treasure[${index}].weight`}>Weight</label>
+                    <Field name={`treasure[${index}].weight`} />
+                    <button
+                      type="button"
+                      className='equipment-remove'
+                      onClick={() => arrayHelpers.remove(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className='equipment-add'
+                  onClick={() => {
+                    arrayHelpers.push({
+                      name: document.getElementById('treasure').value,
+                      quantity: 0,
+                      weight: 0,
+                    })
                   }}
                 >
                   +
