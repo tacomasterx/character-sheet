@@ -1,4 +1,4 @@
-import '../style/AutoComplete.css'
+import '../../style/AutoComplete.css'
 
 function AutoComplete(props) {
 

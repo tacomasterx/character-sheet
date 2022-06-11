@@ -1,37 +1,33 @@
 import {useState} from 'react';
-import {useField} from 'formik';
-import '../style/IdentityField.css';
+import '../../style/IdentityField.css';
 import Autosuggest from 'react-autosuggest';
 // import axios from 'axios';
 // import TextField from '@mui/material/TextField';
 
-import getRaces from '../data/races.js'
-import getClasses from '../data/classes.js'
-import getBackgrounds from '../data/backgrounds.js'
-import getArmor from '../data/armor.js'
+import getWeapons from '../../data/weapons.js'
+import getTools from '../../data/tools.js'
+import getMagicItems from '../../data/magic-items.js'
 
-const IdentityFieldAc = ({label, id, ...props}) => {
-  const [field, meta] = useField(props);
-  // const [country, setCountry] = useState('');
+const EquipmentFieldAc = ({label, ...props}) => {
   const [suggestions, setSuggestions] = useState([]);
 
   return (
-    <div className='formik-fields'>
+    <div className='formik-propss'>
       {
         label !== null ?
-          <label htmlFor={field.name} className='identity-label'>{label}</label> :
+          <label htmlFor={props.name} className='identity-label'>{label}</label> :
           null
       }
       <Autosuggest
         inputProps={{
-          placeholder: `Type a ${field.name}`,
+          placeholder: `Type a ${props.name}`,
           autoComplete: 'off',
-          name: field.name,
-          id: id,
-          value: field.value,
-          className: 'identity-input',
+          name: props.name,
+          id: props.id,
+          value: props.newItem,
+          className: 'equipment-input',
           onChange: (_event, {newValue}) => {
-            props.setFieldValue(field.name, newValue);
+            props.setNewItem(newValue);
           }
         }}
         suggestions={suggestions}
@@ -51,18 +47,15 @@ const IdentityFieldAc = ({label, id, ...props}) => {
 
           setSuggestions(() => {
             let result = [];
-            switch (field.name) {
-              case 'race':
-                result = getRaces(value.toLowerCase());
+            switch (props.name) {
+              case 'weapons':
+                result = getWeapons(value.toLowerCase());
                 break;
-              case 'background':
-                result = getBackgrounds(value.toLowerCase());
+              case 'tool':
+                result = getTools(value.toLowerCase());
                 break;
-              case 'armor':
-                result = getArmor(value.toLowerCase());
-                break;
-              case 'class':
-                result = getClasses(value.toLowerCase());
+              case 'magicItem':
+                result = getMagicItems(value.toLowerCase());
                 break;
               default:
                 break;
@@ -78,21 +71,15 @@ const IdentityFieldAc = ({label, id, ...props}) => {
           if (method === 'enter') {
             event.preventDefault();
           }
-          props.setFieldValue(field.name, suggestion.name);
+          props.setNewItem(suggestion.name);
         }}
         getSuggestionValue={suggestion => suggestion.name}
         renderSuggestion={(suggestion) => <div>{suggestion.name}</div>
         }
       />
-      {
-        meta.touched && meta.error ?
-          <div
-            className='formik-errors'>{meta.error}</div> :
-          null
-      }
     </div >
   );
 
 }
 
-export default IdentityFieldAc;
+export default EquipmentFieldAc;

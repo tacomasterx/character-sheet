@@ -1,5 +1,5 @@
 import {useField} from 'formik';
-import '../style/IdentityField.css'
+import '../../style/IdentityField.css'
 
 const IdentityField = ({label, suggestions, ...props}) => {
   const [field, meta] = useField(props);

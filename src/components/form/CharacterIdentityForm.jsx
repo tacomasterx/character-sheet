@@ -1,5 +1,5 @@
 import {Formik, Form} from 'formik';
-import '../style/CharacterIdentity.css'
+import '../../style/CharacterIdentity.css'
 import IdentityField from './IdentityField.jsx'
 import SelectField from './SelectField.jsx'
 import IdentityFieldAc from './IdentityFieldAc.jsx';

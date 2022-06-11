@@ -1,4 +1,4 @@
-import '../style/CharacterEquipment.css'
+import '../../style/CharacterEquipment.css'
 import {Formik, Form} from 'formik';
 import IdentityFieldAc from './IdentityFieldAc.jsx';
 import EquipmentField from './EquipmentField.jsx';

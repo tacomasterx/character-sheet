@@ -1,5 +1,5 @@
-import { Formik, Form } from 'formik';
-import '../style/CharacterDescription.css'
+import {Formik, Form} from 'formik';
+import '../../style/CharacterDescription.css'
 import IdentityField from './IdentityField.jsx'
 import DescriptionArea from './DescriptionArea.jsx'
 // import SelectField from './SelectField.jsx'

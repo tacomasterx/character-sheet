@@ -1,4 +1,4 @@
-import '../style/EquipmentField.css'
+import '../../style/EquipmentField.css'
 import EquipmentForm from './EquipmentForm.jsx';
 
 function EquipmentField({name, setFieldValue, ...props}) {

@@ -1,5 +1,5 @@
 import {Formik, Form} from 'formik'
-import '../style/CharacterScores.css'
+import '../../style/CharacterScores.css'
 import AbilityScore from './AbilityScore.jsx'
 import CheckBox from './CheckBox.jsx'
 

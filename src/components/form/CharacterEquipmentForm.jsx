@@ -1,5 +1,5 @@
 import {Formik, Form, FieldArray, Field} from 'formik';
-import '../style/CharacterEquipment.css'
+import '../../style/CharacterEquipment.css'
 import IdentityFieldAc from './IdentityFieldAc.jsx';
 import EquipmentField from './EquipmentField.jsx';
 import SelectField from './SelectField.jsx';
@@ -7,10 +7,10 @@ import DescriptionArea from './DescriptionArea.jsx';
 import CheckBox from './CheckBox.jsx';
 // import {AiOutlineCloseCircle} from 'react-icons/ai'
 
-import weaponDetails from '../data/weapon-details.js';
-import parameterList from '../data/parameters.js';
-import toolDetails from '../data/tool-details.js';
-import magicItemsDetails from '../data/mi-details.js';
+import weaponDetails from '../../data/weapon-details.js';
+import parameterList from '../../data/parameters.js';
+import toolDetails from '../../data/tool-details.js';
+import magicItemsDetails from '../../data/mi-details.js';
 
 const validate = (values) => {
   const errors = {};

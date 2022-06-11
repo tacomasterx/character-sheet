@@ -1,8 +1,8 @@
 import './App.css';
-import CharacterIdentityForm from './components/CharacterIdentityForm.jsx'
-import CharacterScoresForm from './components/CharacterScoresForm.jsx'
-import CharacterDescriptionForm from './components/CharacterDescriptionForm.jsx'
-import CharacterEquipmentForm from './components/CharacterEquipmentForm.jsx'
+import CharacterIdentityForm from './components/form/CharacterIdentityForm.jsx'
+import CharacterScoresForm from './components/form/CharacterScoresForm.jsx'
+import CharacterDescriptionForm from './components/form/CharacterDescriptionForm.jsx'
+import CharacterEquipmentForm from './components/form/CharacterEquipmentForm.jsx'
 
 function App() {
   return (
