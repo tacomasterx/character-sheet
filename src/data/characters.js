@@ -20,7 +20,7 @@ const characterFind = (string) => {
 		class: "rogue",
 		id: 2,
 	}];
-	return array.filter(element => element.name.substring(-1, string.length) === string);
+	return array.filter(element => element.name === string);
 }
 
 export default characterFind;
