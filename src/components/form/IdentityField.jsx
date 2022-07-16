@@ -3,7 +3,6 @@ import '../../style/IdentityField.css'
 
 const IdentityField = ({label, suggestions, ...props}) => {
   const [field, meta] = useField(props);
-
   return (
     <div className='formik-fields'>
       <label className='identity-label'>{label}</label>

@@ -1,4 +1,6 @@
 import {Formik, Form} from 'formik'
+import {useParams, useNavigate, Navigate} from 'react-router-dom';
+import characterFind from '../../data/characters';
 import '../../style/CharacterScores.css'
 import AbilityScore from './AbilityScore.jsx'
 import CheckBox from './CheckBox.jsx'
@@ -33,34 +35,62 @@ const validate = (values) => {
   return errors;
 };
 
-function CharacterScores() {
+function CharacterScores(props) {
+  const params = useParams();
+  const navigate = useNavigate();
+  const charExists = characterFind(params.character).length === 1;
+
+  const addNewCharacter = (values) => {
+    const newCharacter = props.newChar;
+    newCharacter.scores = values;
+    props.setNewChar(newCharacter);
+    return props.newChar.identity.url;
+  };
+
+  if (charExists) {
+    return (
+      <>
+        <Navigate to={`/${params.character}`}></Navigate>
+      </>
+    )
+  }
 
   return (
-    <Formik initialValues={{
-      strength: 10,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-      inspiration: false,
-    }}
-      validate={validate}
-      onSubmit={values => console.log(values)}
-    >
-      <Form className='scores-form'>
-        <AbilityScore name='strength' label='Strength' />
-        <AbilityScore name='dexterity' label='Dexterity' />
-        <AbilityScore name='constitution' label='Constitution' />
-        <AbilityScore name='intelligence' label='Intelligence' />
-        <AbilityScore name='wisdom' label='Wisdom' />
-        <AbilityScore name='charisma' label='Charisma' />
-        <CheckBox name='inspiration'>
-          Inspiration
-        </CheckBox>
-        <button type='submit'>Send</button>
-      </Form>
-    </Formik>
+    <>
+      <h2 className="form-title">Set your character's abilities</h2>
+      <Formik initialValues={
+        // {
+        //   strength: 10,
+        //   dexterity: 10,
+        //   constitution: 10,
+        //   intelligence: 10,
+        //   wisdom: 10,
+        //   charisma: 10,
+        //   inspiration: false,
+        // }
+        props.newChar.scores
+      }
+        validate={validate}
+        onSubmit={values => {
+          const charUrl = addNewCharacter(values);
+          navigate(`/form/description/${charUrl}`);
+        }
+        }
+      >
+        <Form className='scores-form'>
+          <AbilityScore name='strength' label='Strength' />
+          <AbilityScore name='dexterity' label='Dexterity' />
+          <AbilityScore name='constitution' label='Constitution' />
+          <AbilityScore name='intelligence' label='Intelligence' />
+          <AbilityScore name='wisdom' label='Wisdom' />
+          <AbilityScore name='charisma' label='Charisma' />
+          <CheckBox name='inspiration'>
+            Inspiration
+          </CheckBox>
+          <button type='submit'>Next</button>
+        </Form>
+      </Formik>
+    </>
   );
 }
 

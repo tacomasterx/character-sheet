@@ -1,26 +1,36 @@
-const characterFind = (string) => {
-	const array = [{
-		abilityScores: {str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1},
-		name: "Olaf Battleborn",
-		class: "fighter",
-		id: 4,
-	}, {
-		abilityScores: {str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1},
-		name: "Chidorimon",
-		class: "cleric",
-		id: 3,
-	}, {
-		abilityScores: {str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1},
-		name: "Osaka Shizucc",
-		class: "bard",
-		id: 1,
-	}, {
-		abilityScores: {str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1},
-		name: "Inigo Montoya",
-		class: "rogue",
-		id: 2,
-	}];
-	return array.filter(element => element.name === string);
+import {useEffect} from 'react'
+import axios from 'axios';
+
+const API_URL = "http://localhost:3000/api/v1/character/url";
+
+async function findCharacter(string) {
+
+
+    return axios
+        .get(`${API_URL}/${string !== '' ? string : 'err'}`)
+        .then((response) =>
+            response.data
+        )
+        .catch(error => {
+            console.log(error);
+        });
 }
 
-export default characterFind;
+const Character = (props) => {
+
+    useEffect(() => {
+        let mounted = true;
+        findCharacter(props.url).then((items) => {
+            if (mounted) {
+                props.setCharacter(items.length !== 0 ? items[0] : {});
+            }
+        });
+        return () => (mounted = false);
+    }, []);
+
+    return (
+        <></>
+    );
+}
+
+export default findCharacter;
