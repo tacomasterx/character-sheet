@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:3000/api/v1/character/url";
 
-async function findCharacter(string) {
+async function characterFind(string) {
 
 
     return axios
@@ -20,7 +20,7 @@ const Character = (props) => {
 
     useEffect(() => {
         let mounted = true;
-        findCharacter(props.url).then((items) => {
+        characterFind(props.url).then((items) => {
             if (mounted) {
                 props.setCharacter(items.length !== 0 ? items[0] : {});
             }
@@ -33,4 +33,4 @@ const Character = (props) => {
     );
 }
 
-export default findCharacter;
+export default characterFind;

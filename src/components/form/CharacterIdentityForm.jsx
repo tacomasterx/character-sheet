@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react'
 import {Formik, Form} from 'formik';
 import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import '../../style/CharacterIdentity.css'
@@ -6,7 +7,7 @@ import SelectField from './SelectField.jsx'
 import IdentityFieldAc from './IdentityFieldAc.jsx';
 import characterFind from '../../data/characters.js';
 
-const validate = (values) => {
+const validate = (values, setValidation, validatedChar) => {
   const errors = {};
 
   if (!values.playerName) {
@@ -17,12 +18,11 @@ const validate = (values) => {
     errors.characterName = 'Required.';
   }
 
-  characterFind(values.characterName).then((data) => {
-    if (data[0] != null) {
-      console.log(data[0]);
-      errors.characterName = 'Character already exists.';
-    }
-  });
+  if (values.characterName === validatedChar) {
+    errors.characterName = 'Character already exists.';
+  } else {
+    setValidation(values.characterName);
+  }
 
   if (!values.class) {
     errors.class = 'Required.';
@@ -48,13 +48,36 @@ const validate = (values) => {
 }
 
 function CharacterIdentity(props) {
+  const [character, setCharacter] = useState({});
+  const [validation, setValidation] = useState('');
+  const [validatedChar, setValidatedChar] = useState('');
   const alignments = ['lawful good', 'lawful neutral', 'lawful evil',
     'neutral good', 'neutral', 'neutral evil',
     'chaotic good', 'chaotic neutral', 'chaotic evil'
   ];
   const navigate = useNavigate();
   const params = useParams();
-  const charExists = characterFind(params.character).length === 1;
+
+  useEffect(() => {
+    let mounted = true;
+    characterFind(params.character).then((items) => {
+      if (mounted) {
+        setCharacter(items.length !== 0 ? items[0] : {});
+      }
+    });
+    return () => (mounted = false);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    characterFind(validation).then((items) => {
+      if (mounted) {
+        setValidatedChar(items.length !== 0 ? items[0].character_name : '');
+        console.log(items.length !== 0 ? items[0].character_name : '');
+      }
+    });
+    return () => (mounted = false);
+  }, [validation, setValidation]);
 
   const addNewCharacter = (character, values) => {
     const newCharacter = props.newChar;
@@ -65,7 +88,7 @@ function CharacterIdentity(props) {
   };
 
 
-  if (charExists) {
+  if (character.url != null) {
     return (
       <>
         <Navigate to={`/${params.character}`}></Navigate>
@@ -89,7 +112,7 @@ function CharacterIdentity(props) {
         // }
         props.newChar.identity
       }
-        validate={validate}
+        validate={values => validate(values, setValidation, validatedChar)}
         onSubmit={values => {
           const charName = addNewCharacter(params.character, values);
           navigate(`/form/scores/${charName}`);

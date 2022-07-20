@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useParams, useNavigate} from "react-router-dom";
-import findCharacter from '../data/characters.js'
+import characterFind from '../data/characters.js'
 
 const Home = () => {
     const [character, setCharacter] = useState({})
@@ -9,7 +9,7 @@ const Home = () => {
 
     useEffect(() => {
         let mounted = true;
-        findCharacter(params.character).then((items) => {
+        characterFind(params.character).then((items) => {
             if (mounted) {
                 setCharacter(items.length !== 0 ? items[0] : {});
             }
