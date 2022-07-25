@@ -5,8 +5,8 @@
 }
 
 html, body {
-  color: white;
-  margin-top: 40px;
+  color: black;
+  margin-top: 8px;
   background-color: #1b1b32;
   font-family: Lato, sans-serif;
 }
@@ -20,19 +20,13 @@ html, body {
   align-items: flex-start;
 }
 
-.container-logo {
-  width: 100vw;
-  height: 50px;
+.container-nav {
+  width: 95vw;
+  height: 10px;
   margin: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.container-nav {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
 }
 
 h1 {
@@ -45,7 +39,7 @@ h1 {
 
 /* Lista de tareas  */
 .container-main {
-  width: 75vw;
+  width: 95vw;
   max-width: 600px;
   min-height: 500px;
   background-color: #d0d0d5;

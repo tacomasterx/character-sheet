@@ -1,3 +1,5 @@
+Using some srd content from https://www.dnd5eapi.co/ as autofill content.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

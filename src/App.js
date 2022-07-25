@@ -16,7 +16,7 @@ function App() {
             identity:
             {
                 playerName: '',
-                characterName: ``,
+                newCharName: ``,
                 race: '',
                 background: '',
                 class: '',
@@ -74,7 +74,8 @@ function App() {
                 <div className="container-main">
                     <Routes>
                         <Route path='/' element={<Navigate to='/instructions' />} />
-                        <Route path='/:character' element={<Home />} />
+                        <Route path='/:character/*' element={<Home />} >
+                        </Route>
                         <Route path='/form/*' element={<Form />}>
                             <Route path='identity' element={<Navigate to='/instructions' />} />
                             <Route path='identity/:character' element={<CharacterIdentityForm newChar={newChar} setNewChar={setNewChar} />} />

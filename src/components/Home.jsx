@@ -1,9 +1,11 @@
 import {useState, useEffect} from 'react'
 import {useParams, useNavigate} from "react-router-dom";
-import characterFind from '../data/characters.js'
+import characterFind from '../data/characters.js';
+import derubyfyCharacter from '../data/derubyfy_character.js';
+import CharacterSheet from './sheet/CharacterSheet.jsx';
 
 const Home = () => {
-    const [character, setCharacter] = useState({})
+    const [character, setCharacter] = useState({});
     const params = useParams();
     const navigate = useNavigate();
 
@@ -11,7 +13,8 @@ const Home = () => {
         let mounted = true;
         characterFind(params.character).then((items) => {
             if (mounted) {
-                setCharacter(items.length !== 0 ? items[0] : {});
+                const buffChar = (items.length !== 0 ? items[0] : {});
+                setCharacter(items.length !== 0 ? derubyfyCharacter(buffChar) : {});
             }
         });
         return () => (mounted = false);
@@ -38,10 +41,11 @@ const Home = () => {
         );
     }
 
-    if (character.url != null) {
+    if (character.identity != null) {
+        console.log(character)
         return (
             <>
-                <h1 className="character-sheet-title">{character.character_name}'s home</h1>
+                <CharacterSheet character={character} setCharacter={setCharacter} />
             </>
         );
     }
